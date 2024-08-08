@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("solveRoom2").addEventListener("click", () => {
         const jsConcepts = new Set(['closure', 'scope', 'hoisting', 'async']);
         const reactConcepts = new Set(['components', 'jsx', 'hooks', 'async']);
-        const commonConcepts = jsConcepts.intersection(reactConcepts);
+        const commonConcepts = findIntersection(jsConcepts, reactConcepts)
         document.getElementById("room2Result").textContent = `The code to unlock the door is: ${Array.from(commonConcepts).join(', ')}`;
     });
 
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(directions => {
                 navigateLabyrinth(directions)
                     .then(message => {
-                        // 🪲 Bug: Incorrect method
                         document.getElementById("room3Result").textContent = message;
                     });
             });
@@ -34,9 +33,7 @@ function findMostRecentBook(books) {
 }
 
 function findIntersection(setA, setB) {
-    // 🪲 Bug: Incorrect logic
-    const intersection = new Set([...setA]);
-    return intersection;
+    return setA.intersection(setB);
 }
 
 async function navigateLabyrinth(directions) {
